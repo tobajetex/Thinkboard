@@ -10,12 +10,20 @@ dotenv.config();
 const app = express();
 
 const PORT = process.env.PORT || 5001;
+const allowedOrigins = process.env.CORS_ORIGIN;
+console.log(allowedOrigins);
 
 app.use(express.json());
 if (process.env.NODE_ENV !== "production") {
   app.use(
     cors({
-      origin: "http://localhost:5173",
+      origin: "http://localhost:5174",
+    }),
+  );
+} else {
+  app.use(
+    cors({
+      origin: allowedOrigins,
     }),
   );
 }
